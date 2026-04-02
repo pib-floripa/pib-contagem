@@ -3,37 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PIB Floripa - v5.0 HTML</title>
+    <title>PIB Floripa - Sistema de Contagem</title>
     <style>
         :root { --pib-verde: #004d40; --pib-fundo: #f1f8e9; --pib-borda: #a5d6a7; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #ffffff; color: #333; margin: 0; padding: 15px; font-size: 18px; }
+        /* Fonte base aumentada para 20px para melhor leitura no celular */
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #ffffff; color: #333; margin: 0; padding: 15px; font-size: 20px; }
         
         .header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid var(--pib-verde); padding-bottom: 10px; }
-        .header h1 { color: var(--pib-verde); font-size: 40px; margin: 0; font-weight: 800; }
-        .header p { color: var(--pib-verde); margin: 0; font-size: 18px; }
+        .header h1 { color: var(--pib-verde); font-size: 42px; margin: 0; font-weight: 800; }
+        .header p { color: var(--pib-verde); margin: 0; font-size: 20px; }
 
         .login-container { border: 2px solid var(--pib-verde); padding: 30px 20px; border-radius: 15px; text-align: center; margin-top: 40px; }
         
         .st-expander { border: 2px solid var(--pib-borda); border-radius: 12px; background-color: var(--pib-fundo); margin-bottom: 15px; overflow: hidden; }
         .st-expander-header { 
-            background-color: white; color: var(--pib-verde); padding: 15px; 
-            cursor: pointer; font-weight: bold; font-size: 18px; 
+            background-color: white; color: var(--pib-verde); padding: 18px; 
+            cursor: pointer; font-weight: bold; font-size: 22px; 
             display: flex; justify-content: space-between; align-items: center;
         }
-        .st-expander-header::after { content: '▼'; font-size: 12px; transition: 0.3s; }
+        .st-expander-header::after { content: '▼'; font-size: 14px; transition: 0.3s; }
         .st-expander.open .st-expander-header::after { content: '▲'; }
         
         .st-expander-content { display: none; padding: 15px; border-top: 1px solid var(--pib-borda); }
         .st-expander.open .st-expander-content { display: block; }
 
-        .faixa { background-color: var(--pib-verde); color: white; padding: 10px; border-radius: 6px; font-size: 16px; margin: 15px 0 10px 0; font-weight: bold; text-align: center; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+        /* Estilo das faixas com alinhamento específico */
+        .faixa { background-color: var(--pib-verde); color: white; padding: 12px; border-radius: 6px; font-size: 18px; margin: 18px 0 10px 0; font-weight: bold; }
+        .faixa-centro { text-align: center; }
+        .faixa-esquerda { text-align: left; padding-left: 15px; }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         
-        label { color: var(--pib-verde); font-weight: 700; font-size: 13px; margin-bottom: 4px; display: block; }
-        input { height: 50px; border: 1px solid #bbb; border-radius: 8px; font-size: 18px; text-align: center; width: 100%; box-sizing: border-box; }
+        /* Ajuste de labels para melhor leitura */
+        label { color: var(--pib-verde); font-weight: 700; font-size: 15px; margin-bottom: 6px; display: block; }
+        input { height: 55px; border: 1px solid #bbb; border-radius: 8px; font-size: 20px; text-align: center; width: 100%; box-sizing: border-box; }
         
-        .btn { background-color: var(--pib-verde); color: white; border: none; border-radius: 12px; height: 65px; width: 100%; font-size: 20px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        #relatorio-preview { background: #f5f5f5; border: 2px solid #333; padding: 15px; border-radius: 10px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; margin-top: 20px; display: none; font-size: 14px; line-height: 1.2; color: #000; }
+        .btn { background-color: var(--pib-verde); color: white; border: none; border-radius: 12px; height: 70px; width: 100%; font-size: 22px; font-weight: bold; cursor: pointer; margin-top: 12px; }
+        #relatorio-preview { background: #f5f5f5; border: 2px solid #333; padding: 15px; border-radius: 10px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; margin-top: 20px; display: none; font-size: 16px; line-height: 1.3; color: #000; }
         .hidden { display: none !important; }
     </style>
 </head>
@@ -46,7 +52,7 @@
 
     <div id="login-screen" class="login-container">
         <h3 style="color: var(--pib-verde);">🔐 Autenticação</h3>
-        <input type="password" id="senha" placeholder="Senha..." style="margin-bottom: 20px; width: 80%;">
+        <input type="password" id="senha" placeholder="Senha..." style="margin-bottom: 20px; width: 85%;">
         <button class="btn" onclick="autenticar()">Entrar</button>
     </div>
 
@@ -60,35 +66,35 @@
                 <label style="margin-top:10px;">Data</label>
                 <input type="date" id="data_contagem" oninput="salvar()">
 
-                <div class="faixa">Compareceram</div>
+                <div class="faixa faixa-centro">Compareceram</div>
                 <div class="grid">
                     <div><label>Templo</label><input type="number" id="t9" oninput="salvar()"></div>
                     <div><label>Visitantes</label><input type="number" id="v9" oninput="salvar()"></div>
                     <div><label>6º Andar</label><input type="number" id="s9" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">Servindo</div>
+                <div class="faixa faixa-esquerda">🛠️ Servindo</div>
                 <div class="grid">
                     <div><label>Diaconia</label><input type="number" id="di9" oninput="salvar()"></div>
                     <div><label>Mesa</label><input type="number" id="me9" oninput="salvar()"></div>
                     <div><label>Louvor</label><input type="number" id="lo9" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">MI (Infantil)</div>
+                <div class="faixa faixa-esquerda">🧒 MI (Infantil)</div>
                 <div class="grid">
                     <div><label>Crianças</label><input type="number" id="mic9" oninput="salvar()"></div>
                     <div><label>Servos</label><input type="number" id="mis9" oninput="salvar()"></div>
                     <div><label>Pai/Mãe</label><input type="number" id="mip9" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">MPA (Adolescentes)</div>
+                <div class="faixa faixa-esquerda">🧑‍🦱 MPA (Adolescentes)</div>
                 <div class="grid">
                     <div><label>Crianças</label><input type="number" id="mpac9" oninput="salvar()"></div>
                     <div><label>Servos</label><input type="number" id="mpas9" oninput="salvar()"></div>
                     <div><label>Pai/Mãe</label><input type="number" id="mpap9" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">Ebed</div>
+                <div class="faixa faixa-esquerda">📚 Ebed</div>
                 <label>Total Ebed</label>
                 <input type="number" id="eb9" oninput="salvar()">
             </div>
@@ -100,28 +106,28 @@
                 <label>Responsável (11h)</label>
                 <input type="text" id="res11" oninput="salvar()" placeholder="Nome...">
 
-                <div class="faixa">Compareceram</div>
+                <div class="faixa faixa-centro">Compareceram</div>
                 <div class="grid">
                     <div><label>Templo</label><input type="number" id="t11" oninput="salvar()"></div>
                     <div><label>Visitantes</label><input type="number" id="v11" oninput="salvar()"></div>
                     <div><label>6º Andar</label><input type="number" id="s11" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">Servindo</div>
+                <div class="faixa faixa-esquerda">🛠️ Servindo</div>
                 <div class="grid">
                     <div><label>Diaconia</label><input type="number" id="di11" oninput="salvar()"></div>
                     <div><label>Mesa</label><input type="number" id="me11" oninput="salvar()"></div>
                     <div><label>Louvor</label><input type="number" id="lo11" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">MI (Infantil)</div>
+                <div class="faixa faixa-esquerda">🧒 MI (Infantil)</div>
                 <div class="grid">
                     <div><label>Crianças</label><input type="number" id="mic11" oninput="salvar()"></div>
                     <div><label>Servos</label><input type="number" id="mis11" oninput="salvar()"></div>
                     <div><label>Pai/Mãe</label><input type="number" id="mip11" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">Classe Batismo</div>
+                <div class="faixa faixa-esquerda">🌊 Classe Batismo</div>
                 <div class="grid">
                     <div><label>Jovens</label><input type="number" id="bj" oninput="salvar()"></div>
                     <div><label>Adultos</label><input type="number" id="ba" oninput="salvar()"></div>
@@ -133,7 +139,7 @@
         <button class="btn" style="background-color: #2e7d32;" onclick="gerarRelatorio()">📄 Visualizar Relatório</button>
         <div id="relatorio-preview"></div>
         <button class="btn" onclick="enviar()">📲 Enviar WhatsApp</button>
-        <button class="btn" style="background-color: #546e7a; height: 45px; font-size: 14px; margin-top: 20px;" onclick="limpar()">🗑️ Limpar Formulário</button>
+        <button class="btn" style="background-color: #546e7a; height: 50px; font-size: 16px; margin-top: 20px;" onclick="limpar()">🗑️ Limpar Formulário</button>
     </div>
 
     <script>
@@ -156,14 +162,12 @@
         function gerarRelatorio() {
             const dt = document.getElementById('data_contagem').value.split('-').reverse().join('/') || "__/__/____";
             
-            // Cálculos 9h
             const comp9 = nz('t9')+nz('v9')+nz('s9');
             const serv9 = nz('di9')+nz('me9')+nz('lo9');
             const mi9 = nz('mic9')+nz('mis9')+nz('mip9');
             const mpa9 = nz('mpac9')+nz('mpas9')+nz('mpap9');
             const tot9 = comp9 + serv9 + mi9 + mpa9 + nz('eb9');
 
-            // Cálculos 11h
             const comp11 = nz('t11')+nz('v11')+nz('s11');
             const serv11 = nz('di11')+nz('me11')+nz('lo11');
             const mi11 = nz('mic11')+nz('mis11')+nz('mip11');
