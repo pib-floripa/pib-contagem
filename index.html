@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,6 @@
 
         .login-container { border: 2px solid var(--pib-verde); padding: 30px 20px; border-radius: 15px; text-align: center; margin-top: 40px; }
         
-        /* Estilo do Expander (Igual Streamlit) */
         .st-expander { border: 2px solid var(--pib-borda); border-radius: 12px; background-color: var(--pib-fundo); margin-bottom: 15px; overflow: hidden; }
         .st-expander-header { 
             background-color: white; color: var(--pib-verde); padding: 15px; 
@@ -32,10 +31,9 @@
         
         label { color: var(--pib-verde); font-weight: 700; font-size: 13px; margin-bottom: 4px; display: block; }
         input { height: 50px; border: 1px solid #bbb; border-radius: 8px; font-size: 18px; text-align: center; width: 100%; box-sizing: border-box; }
-        input[type="text"], input[type="date"] { text-align: left; padding: 0 10px; }
         
         .btn { background-color: var(--pib-verde); color: white; border: none; border-radius: 12px; height: 65px; width: 100%; font-size: 20px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        #relatorio-preview { background: #f1f1f1; border: 1px solid #999; padding: 15px; border-radius: 10px; font-family: monospace; white-space: pre-wrap; margin-top: 20px; display: none; font-size: 14px; }
+        #relatorio-preview { background: #f5f5f5; border: 2px solid #333; padding: 15px; border-radius: 10px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; margin-top: 20px; display: none; font-size: 14px; line-height: 1.2; color: #000; }
         .hidden { display: none !important; }
     </style>
 </head>
@@ -43,7 +41,7 @@
 
     <div class="header">
         <h1>PIB FLORIPA</h1>
-        <p>v1.2 - Sistema de Contagem (Offline)</p>
+        <p>Sistema de Contagem Oficial</p>
     </div>
 
     <div id="login-screen" class="login-container">
@@ -55,80 +53,79 @@
     <div id="main-content" class="hidden">
         
         <div class="st-expander" id="exp9">
-            <div class="st-expander-header" onclick="toggleExpander('exp9')">🟢 CULTO DAS 09:00h - Preencher Dados</div>
+            <div class="st-expander-header" onclick="toggleExpander('exp9')">🟢 CULTO DAS 09:00h</div>
             <div class="st-expander-content">
-                <label>Responsável pela contagem (9h)</label>
-                <input type="text" id="res9" placeholder="Nome..." oninput="salvar()">
-                
-                <label style="margin-top:15px;">Data</label>
+                <label>Responsável (9h)</label>
+                <input type="text" id="res9" oninput="salvar()" placeholder="Nome...">
+                <label style="margin-top:10px;">Data</label>
                 <input type="date" id="data_contagem" oninput="salvar()">
 
                 <div class="faixa">Compareceram</div>
                 <div class="grid">
-                    <div><label>Templo/Mezanino</label><input type="number" id="t9" oninput="salvar()"></div>
+                    <div><label>Templo</label><input type="number" id="t9" oninput="salvar()"></div>
                     <div><label>Visitantes</label><input type="number" id="v9" oninput="salvar()"></div>
-                    <div><label>Sexto andar</label><input type="number" id="s9" oninput="salvar()"></div>
+                    <div><label>6º Andar</label><input type="number" id="s9" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">🛠️ Servindo</div>
+                <div class="faixa">Servindo</div>
                 <div class="grid">
                     <div><label>Diaconia</label><input type="number" id="di9" oninput="salvar()"></div>
                     <div><label>Mesa</label><input type="number" id="me9" oninput="salvar()"></div>
                     <div><label>Louvor</label><input type="number" id="lo9" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">🎒 MI (Ministério Infantil)</div>
+                <div class="faixa">MI (Infantil)</div>
                 <div class="grid">
                     <div><label>Crianças</label><input type="number" id="mic9" oninput="salvar()"></div>
                     <div><label>Servos</label><input type="number" id="mis9" oninput="salvar()"></div>
                     <div><label>Pai/Mãe</label><input type="number" id="mip9" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">🎮 MPA (Pré-Adolescente)</div>
+                <div class="faixa">MPA (Adolescentes)</div>
                 <div class="grid">
-                    <div><label>Crianças </label><input type="number" id="mpac9" oninput="salvar()"></div>
-                    <div><label>Servos </label><input type="number" id="mpas9" oninput="salvar()"></div>
-                    <div><label>Pai/Mãe </label><input type="number" id="mpap9" oninput="salvar()"></div>
+                    <div><label>Crianças</label><input type="number" id="mpac9" oninput="salvar()"></div>
+                    <div><label>Servos</label><input type="number" id="mpas9" oninput="salvar()"></div>
+                    <div><label>Pai/Mãe</label><input type="number" id="mpap9" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">📚 Ebed</div>
+                <div class="faixa">Ebed</div>
                 <label>Total Ebed</label>
                 <input type="number" id="eb9" oninput="salvar()">
             </div>
         </div>
 
         <div class="st-expander" id="exp11">
-            <div class="st-expander-header" onclick="toggleExpander('exp11')">🟢 CULTO DAS 11:00h - Preencher Dados</div>
+            <div class="st-expander-header" onclick="toggleExpander('exp11')">🟢 CULTO DAS 11:00h</div>
             <div class="st-expander-content">
-                <label>Responsável pela contagem (11h)</label>
-                <input type="text" id="res11" placeholder="Nome..." oninput="salvar()">
+                <label>Responsável (11h)</label>
+                <input type="text" id="res11" oninput="salvar()" placeholder="Nome...">
 
                 <div class="faixa">Compareceram</div>
                 <div class="grid">
-                    <div><label>Templo/Mezanino </label><input type="number" id="t11" oninput="salvar()"></div>
-                    <div><label>Visitantes </label><input type="number" id="v11" oninput="salvar()"></div>
-                    <div><label>Sexto andar </label><input type="number" id="s11" oninput="salvar()"></div>
+                    <div><label>Templo</label><input type="number" id="t11" oninput="salvar()"></div>
+                    <div><label>Visitantes</label><input type="number" id="v11" oninput="salvar()"></div>
+                    <div><label>6º Andar</label><input type="number" id="s11" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">🛠️ Servindo</div>
+                <div class="faixa">Servindo</div>
                 <div class="grid">
-                    <div><label>Diaconia </label><input type="number" id="di11" oninput="salvar()"></div>
-                    <div><label>Mesa </label><input type="number" id="me11" oninput="salvar()"></div>
-                    <div><label>Louvor </label><input type="number" id="lo11" oninput="salvar()"></div>
+                    <div><label>Diaconia</label><input type="number" id="di11" oninput="salvar()"></div>
+                    <div><label>Mesa</label><input type="number" id="me11" oninput="salvar()"></div>
+                    <div><label>Louvor</label><input type="number" id="lo11" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">🎒 MI (Ministério Infantil)</div>
+                <div class="faixa">MI (Infantil)</div>
                 <div class="grid">
-                    <div><label>Crianças </label><input type="number" id="mic11" oninput="salvar()"></div>
-                    <div><label>Servos </label><input type="number" id="mis11" oninput="salvar()"></div>
-                    <div><label>Pai/Mãe </label><input type="number" id="mip11" oninput="salvar()"></div>
+                    <div><label>Crianças</label><input type="number" id="mic11" oninput="salvar()"></div>
+                    <div><label>Servos</label><input type="number" id="mis11" oninput="salvar()"></div>
+                    <div><label>Pai/Mãe</label><input type="number" id="mip11" oninput="salvar()"></div>
                 </div>
 
-                <div class="faixa">🎓 Classe Batismo</div>
+                <div class="faixa">Classe Batismo</div>
                 <div class="grid">
                     <div><label>Jovens</label><input type="number" id="bj" oninput="salvar()"></div>
                     <div><label>Adultos</label><input type="number" id="ba" oninput="salvar()"></div>
-                    <div><label>Servos </label><input type="number" id="bs" oninput="salvar()"></div>
+                    <div><label>Servos</label><input type="number" id="bs" oninput="salvar()"></div>
                 </div>
             </div>
         </div>
@@ -136,15 +133,13 @@
         <button class="btn" style="background-color: #2e7d32;" onclick="gerarRelatorio()">📄 Visualizar Relatório</button>
         <div id="relatorio-preview"></div>
         <button class="btn" onclick="enviar()">📲 Enviar WhatsApp</button>
-        <button class="btn" style="background-color: #546e7a; height: 45px; font-size: 14px;" onclick="limpar()">🗑️ Limpar Formulário</button>
+        <button class="btn" style="background-color: #546e7a; height: 45px; font-size: 14px; margin-top: 20px;" onclick="limpar()">🗑️ Limpar Formulário</button>
     </div>
 
     <script>
         const ids = ['res9','data_contagem','t9','v9','s9','di9','me9','lo9','mic9','mis9','mip9','mpac9','mpas9','mpap9','eb9','res11','t11','v11','s11','di11','me11','lo11','mic11','mis11','mip11','bj','ba','bs'];
 
-        function toggleExpander(id) {
-            document.getElementById(id).classList.toggle('open');
-        }
+        function toggleExpander(id) { document.getElementById(id).classList.toggle('open'); }
 
         function autenticar() {
             if(document.getElementById('senha').value.toUpperCase()==='PIB474'){
@@ -155,38 +150,100 @@
         }
 
         function salvar() { ids.forEach(id => localStorage.setItem('pib_'+id, document.getElementById(id).value)); }
-
         function limpar() { if(confirm("Limpar dados?")){ ids.forEach(id => localStorage.removeItem('pib_'+id)); location.reload(); } }
-
         function nz(id) { const v = document.getElementById(id).value; return v === "" ? 0 : parseInt(v); }
 
         function gerarRelatorio() {
-            const dt = document.getElementById('data_contagem').value.split('-').reverse().join('/') || "dd/mm/aaaa";
-            const rel = `Relatório dos cultos...`; // (Lógica de cálculo omitida aqui para brevidade, mas mantida igual à anterior no seu arquivo)
-            // ... (mesma lógica de texto do relatório anterior)
+            const dt = document.getElementById('data_contagem').value.split('-').reverse().join('/') || "__/__/____";
             
-            // Recalculando totais para o preview
-            const c9 = nz('t9')+nz('v9')+nz('s9');
-            const s9 = nz('di9')+nz('me9')+nz('lo9');
+            // Cálculos 9h
+            const comp9 = nz('t9')+nz('v9')+nz('s9');
+            const serv9 = nz('di9')+nz('me9')+nz('lo9');
             const mi9 = nz('mic9')+nz('mis9')+nz('mip9');
             const mpa9 = nz('mpac9')+nz('mpas9')+nz('mpap9');
-            const t9 = c9 + s9 + mi9 + mpa9 + nz('eb9');
-            const c11 = nz('t11')+nz('v11')+nz('s11');
-            const s11 = nz('di11')+nz('me11')+nz('lo11');
-            const mi11 = nz('mic11')+nz('mis11')+nz('mip11');
-            const bat = nz('bj')+nz('ba')+nz('bs');
-            const t11 = c11 + s11 + mi11 + bat;
+            const tot9 = comp9 + serv9 + mi9 + mpa9 + nz('eb9');
 
-            const rel_texto = `Relatório dos cultos\n\nCulto das 9:00hrs\nResponsável: ${document.getElementById('res9').value}\nData: ${dt}\n\nTOTAL GERAL: ${t9 + t11}`; // Simplificado para exemplo, use a versão completa.
-            
-            document.getElementById('relatorio-preview').innerText = rel_texto;
+            // Cálculos 11h
+            const comp11 = nz('t11')+nz('v11')+nz('s11');
+            const serv11 = nz('di11')+nz('me11')+nz('lo11');
+            const mi11 = nz('mic11')+nz('mis11')+nz('mip11');
+            const bat11 = nz('bj')+nz('ba')+nz('bs');
+            const tot11 = comp11 + serv11 + mi11 + bat11;
+
+            const rel = `Relatório dos cultos
+
+Culto das 9:00hrs
+Responsável pela contagem: ${document.getElementById('res9').value}
+Data: ${dt}
+
+Compareceram
+Templo e mezanino: ${nz('t9')}
+Visitantes: ${nz('v9')}
+Sexto andar: ${nz('s9')}
+Total: ${comp9}
+
+Servindo:
+Diaconia: ${nz('di9')}
+Mesa: ${nz('me9')}
+Louvor: ${nz('lo9')}
+Total: ${serv9}
+
+MI:
+Crianças: ${nz('mic9')}
+Servos: ${nz('mis9')}
+Pai/Mãe: ${nz('mip9')}
+Total: ${mi9}
+
+MPA:
+Crianças: ${nz('mpac9')}
+Servos: ${nz('mpas9')}
+Pai/Mãe: ${nz('mpap9')}
+Total: ${mpa9}
+
+Ebed: ${nz('eb9')}
+
+TOTAL DO CULTO DAS 9:00hrs: ${tot9}
+
+Culto das 11:00hrs
+Responsável pela contagem: ${document.getElementById('res11').value}
+Data: ${dt}
+
+Compareceram
+Templo e mezanino: ${nz('t11')}
+Visitantes: ${nz('v11')}
+Sexto andar: ${nz('s11')}
+Total: ${comp11}
+
+Servindo:
+Diaconia: ${nz('di11')}
+Mesa: ${nz('me11')}
+Louvor: ${nz('lo11')}
+Total: ${serv11}
+
+MI:
+Crianças: ${nz('mic11')}
+Servos: ${nz('mis11')}
+Pai/Mãe: ${nz('mip11')}
+Total: ${mi11}
+
+Classe batismo:
+Jovens: ${nz('bj')}
+Adultos: ${nz('ba')}
+Servos: ${nz('bs')}
+Total: ${bat11}
+
+TOTAL DO CULTO DAS 11:00hrs: ${tot11}
+
+TOTAL GERAL: ${tot9 + tot11}`;
+
+            document.getElementById('relatorio-preview').innerText = rel;
             document.getElementById('relatorio-preview').style.display = 'block';
-            return rel_texto;
+            window.scrollTo(0, document.body.scrollHeight);
+            return rel;
         }
 
         function enviar() { 
-            // Use a função de relatório completa aqui
-            const msg = "```\n" + document.getElementById('relatorio-preview').innerText + "\n```";
+            const msg = "```\n" + gerarRelatorio() + "\n```";
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank'); 
         }
     </script>
