@@ -6,40 +6,41 @@
     <title>PIB Floripa - Sistema de Contagem</title>
     <style>
         :root { --pib-verde: #004d40; --pib-fundo: #f1f8e9; --pib-borda: #a5d6a7; }
-        /* Fonte base aumentada para 20px para melhor leitura no celular */
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #ffffff; color: #333; margin: 0; padding: 15px; font-size: 20px; }
         
-        .header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid var(--pib-verde); padding-bottom: 10px; }
-        .header h1 { color: var(--pib-verde); font-size: 42px; margin: 0; font-weight: 800; }
-        .header p { color: var(--pib-verde); margin: 0; font-size: 20px; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #ffffff; color: #333; margin: 0; padding: 15px; font-size: 24px; }
+        
+        .header { text-align: center; margin-bottom: 20px; border-bottom: 3px solid var(--pib-verde); padding-bottom: 10px; }
+        .header h1 { color: var(--pib-verde); font-size: 48px; margin: 0; font-weight: 800; }
+        .header p { color: var(--pib-verde); margin: 0; font-size: 24px; }
 
-        .login-container { border: 2px solid var(--pib-verde); padding: 30px 20px; border-radius: 15px; text-align: center; margin-top: 40px; }
+        .login-container { border: 3px solid var(--pib-verde); padding: 35px 20px; border-radius: 15px; text-align: center; margin-top: 40px; }
         
         .st-expander { border: 2px solid var(--pib-borda); border-radius: 12px; background-color: var(--pib-fundo); margin-bottom: 15px; overflow: hidden; }
         .st-expander-header { 
-            background-color: white; color: var(--pib-verde); padding: 18px; 
-            cursor: pointer; font-weight: bold; font-size: 22px; 
+            background-color: white; color: var(--pib-verde); padding: 22px; 
+            cursor: pointer; font-weight: bold; font-size: 28px; 
             display: flex; justify-content: space-between; align-items: center;
         }
-        .st-expander-header::after { content: '▼'; font-size: 14px; transition: 0.3s; }
+        .st-expander-header::after { content: '▼'; font-size: 18px; transition: 0.3s; }
         .st-expander.open .st-expander-header::after { content: '▲'; }
         
-        .st-expander-content { display: none; padding: 15px; border-top: 1px solid var(--pib-borda); }
+        .st-expander-content { display: none; padding: 20px; border-top: 1px solid var(--pib-borda); }
         .st-expander.open .st-expander-content { display: block; }
 
-        /* Estilo das faixas com alinhamento específico */
-        .faixa { background-color: var(--pib-verde); color: white; padding: 12px; border-radius: 6px; font-size: 18px; margin: 18px 0 10px 0; font-weight: bold; }
+        .faixa { background-color: var(--pib-verde); color: white; padding: 15px; border-radius: 6px; font-size: 22px; margin: 25px 0 12px 0; font-weight: bold; }
         .faixa-centro { text-align: center; }
         .faixa-esquerda { text-align: left; padding-left: 15px; }
 
-        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 20px; }
         
-        /* Ajuste de labels para melhor leitura */
-        label { color: var(--pib-verde); font-weight: 700; font-size: 15px; margin-bottom: 6px; display: block; }
-        input { height: 55px; border: 1px solid #bbb; border-radius: 8px; font-size: 20px; text-align: center; width: 100%; box-sizing: border-box; }
+        /* AQUI ESTÁ O AJUSTE: Legendas (Data, Templo, etc) agora em 22px e Negrito */
+        label { color: var(--pib-verde); font-weight: 800; font-size: 22px; margin-bottom: 10px; display: block; line-height: 1.2; }
         
-        .btn { background-color: var(--pib-verde); color: white; border: none; border-radius: 12px; height: 70px; width: 100%; font-size: 22px; font-weight: bold; cursor: pointer; margin-top: 12px; }
-        #relatorio-preview { background: #f5f5f5; border: 2px solid #333; padding: 15px; border-radius: 10px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; margin-top: 20px; display: none; font-size: 16px; line-height: 1.3; color: #000; }
+        input { height: 70px; border: 2px solid #bbb; border-radius: 10px; font-size: 28px; text-align: center; width: 100%; box-sizing: border-box; background-color: white; color: black; margin-bottom: 5px; }
+        
+        .btn { background-color: var(--pib-verde); color: white; border: none; border-radius: 15px; height: 85px; width: 100%; font-size: 28px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        
+        #relatorio-preview { background: #f5f5f5; border: 2px solid #333; padding: 15px; border-radius: 10px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; margin-top: 25px; display: none; font-size: 18px; line-height: 1.4; color: #000; font-weight: bold; }
         .hidden { display: none !important; }
     </style>
 </head>
@@ -51,8 +52,8 @@
     </div>
 
     <div id="login-screen" class="login-container">
-        <h3 style="color: var(--pib-verde);">🔐 Autenticação</h3>
-        <input type="password" id="senha" placeholder="Senha..." style="margin-bottom: 20px; width: 85%;">
+        <h3 style="color: var(--pib-verde); font-size: 34px;">🔐 Autenticação</h3>
+        <input type="password" id="senha" placeholder="Senha..." style="margin-bottom: 25px; width: 90%;">
         <button class="btn" onclick="autenticar()">Entrar</button>
     </div>
 
@@ -63,7 +64,7 @@
             <div class="st-expander-content">
                 <label>Responsável (9h)</label>
                 <input type="text" id="res9" oninput="salvar()" placeholder="Nome...">
-                <label style="margin-top:10px;">Data</label>
+                <label style="margin-top:20px;">Data</label>
                 <input type="date" id="data_contagem" oninput="salvar()">
 
                 <div class="faixa faixa-centro">Compareceram</div>
@@ -139,7 +140,7 @@
         <button class="btn" style="background-color: #2e7d32;" onclick="gerarRelatorio()">📄 Visualizar Relatório</button>
         <div id="relatorio-preview"></div>
         <button class="btn" onclick="enviar()">📲 Enviar WhatsApp</button>
-        <button class="btn" style="background-color: #546e7a; height: 50px; font-size: 16px; margin-top: 20px;" onclick="limpar()">🗑️ Limpar Formulário</button>
+        <button class="btn" style="background-color: #546e7a; height: 65px; font-size: 20px; margin-top: 35px;" onclick="limpar()">🗑️ Limpar Formulário</button>
     </div>
 
     <script>
